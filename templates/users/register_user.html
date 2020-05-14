@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} Welcome {% endblock %}
+{% block content %}
+<div>
+  <h1>Welcome to MyNotes</h1>
+  <p>The MyNotes application gives users a safe and secure way to save your notes so that you can access them from anywhere and from any system. </p>
+  
+  <p>To get started all you need to do is sign up by registering: </p>
+  <h1>Register</h1>
+  <form method="POST">
+    {{form.hidden_tag()}}
+    {% for field in form.errors %}
+    <div class="alert alert-danger">{{ field }}:
+      <ul>
+        {% for error in form.errors[field] %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+    {% for field in form if field.widget.input_type != 'hidden' %}
+
+    <div class="form-group row">
+      {{field.label(class="col-sm-2 col-form-label")}}
+      <div class="col-sm-10">
+        {{field(class="form-control")}}
+      </div>
+    </div>
+  
+    {% endfor %}
+    <button class="btn btn-primary">Sign up!</button>
+
+
+  </form>
+</div>
+
+{% endblock %}
